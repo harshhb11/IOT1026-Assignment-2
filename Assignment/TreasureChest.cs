@@ -36,7 +36,8 @@
 
         public State Manipulate(Action action)
         {
-            if (action == Action.Open) {
+            if (action == Action.Open)
+            {
                 Open();
             }
             return _state;
