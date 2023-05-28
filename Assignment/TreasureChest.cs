@@ -1,4 +1,6 @@
-﻿namespace Assignment
+﻿using System;
+
+namespace Assignment
 {
     public class TreasureChest
     {
@@ -10,9 +12,9 @@
         // Default Constructor
         public TreasureChest()
         {
-            _material = Material.Iron;
-            _lockType = LockType.Expert;
-            _lootQuality = LootQuality.Green;
+            _material = Material.Steel;
+            _lockType = LockType.Pro;
+            _lootQuality = LootQuality.White;
         }
 
         // Document these methods with XML documentation
@@ -45,12 +47,34 @@
 
         public void Unlock()
         {
-            throw new NotImplementedException();
+            if (_state == State.Closed)
+            {
+                _state = State.Open;
+            }
+            else if (_state == State.Open)
+            {
+                Console.WriteLine("The chest is already open!");
+            }
+            else if (_state == State.Locked)
+            {
+                Console.WriteLine("The chest cannot be opened because it is locked.");
+            }
         }
 
         public void Lock()
         {
-            throw new NotImplementedException();
+            if (_state == State.Closed)
+            {
+                _state = State.Open;
+            }
+            else if (_state == State.Open)
+            {
+                Console.WriteLine("The chest is already open!");
+            }
+            else if (_state == State.Locked)
+            {
+                Console.WriteLine("The chest cannot be opened because it is locked.");
+            }
         }
 
         public void Open()
@@ -72,7 +96,18 @@
 
         public void Close()
         {
-            throw new NotImplementedException();
+            if (_state == State.Closed)
+            {
+                _state = State.Open;
+            }
+            else if (_state == State.Open)
+            {
+                Console.WriteLine("The chest is already open!");
+            }
+            else if (_state == State.Locked)
+            {
+                Console.WriteLine("The chest cannot be opened because it is locked.");
+            }
         }
 
         public override string ToString()
@@ -87,8 +122,34 @@
 
         public enum State { Open, Closed, Locked };
         public enum Action { Open, Close, Lock, Unlock };
-        public enum Material { Oak, RichMahogany, Iron };
-        public enum LockType { Novice, Intermediate, Expert };
-        public enum LootQuality { Grey, Green, Purple };
+        public enum Material
+        {
+            Oak, RichMahogany, Iron,
+            Steel
+        }
+        public enum LockType
+        {
+            Novice, Intermediate, Expert,
+            Pro
+        }
+        public enum LootQuality
+        {
+            Grey, Green, Purple,
+            White
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+            TreasureChest chest = new TreasureChest();
+
+            Console.WriteLine(chest.ToString());
+            chest.Manipulate(TreasureChest.Action.Open);
+            Console.WriteLine(chest.ToString());
+
+
+        }
     }
 }
